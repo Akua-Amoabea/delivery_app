@@ -24,13 +24,27 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           onChanged: onChanged,
           focusNode: focusNode,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.text,
           decoration: InputDecoration(
             fillColor: background,
             filled: true,
             counterText: '',
             hintText: hintText,
-            border: InputBorder.none,
+
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.transparent),
+            ),
+
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.transparent),
+            ),
+
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.transparent, width: 2),
+            ),
           ),
           textInputAction: nextFocusNode == null
               ? TextInputAction.done
@@ -43,7 +57,7 @@ class CustomTextField extends StatelessWidget {
             }
           },
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 10),
       ],
     );
   }

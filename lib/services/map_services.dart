@@ -86,7 +86,6 @@ class MapServices {
     LatLng? destination,
   ) async {
     final bounds = boundsFromLatLngList([pickup!, destination!]);
-
     final controller = await _controller.future;
 
     await controller.animateCamera(

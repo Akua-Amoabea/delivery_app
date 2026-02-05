@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:delivery_app/constants/colors.dart';
+import 'package:delivery_app/home/components/courier_details.dart';
+import 'package:delivery_app/home/components/delivery_details.dart';
 import 'package:delivery_app/home/home_screen.dart';
 import 'package:delivery_app/provider/data_provider.dart';
 import 'package:delivery_app/widgets/controller_manager.dart';
@@ -91,7 +93,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
             onMapCreated: _mapServices.onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _initialPosition,
-              zoom: 11,
+              zoom: 12,
             ),
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
@@ -102,7 +104,18 @@ class _GoogleMapsState extends State<GoogleMaps> {
           Positioned(
             top: 50,
             left: 20,
-            child: IconButton(
+            right: dataProvider.isOrdered? 20: null,
+            child: dataProvider.isOrdered? 
+                
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: primaryColor
+                  ),
+                  child: Text('Your Courier is on the way!', style: TextStyle(color: whiteColor),),
+                )
+            
+            :IconButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -140,31 +153,70 @@ class _GoogleMapsState extends State<GoogleMaps> {
                     ),
                   ],
                 ),
-                child: dataProvider.isSubmitted
+                child: dataProvider.isOrdered
+                    ? CourierDetails()
+                    : dataProvider.isSubmitted
                     ? SingleChildScrollView(
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextButton(
+                            IconButton(
                               onPressed: () {
                                 dataProvider.resetSelection();
                                 requestLocationPermission();
                                 dataProvider.setIsSubmitted(false);
                               },
-                              child: Text(
-                                'Back',
-                                style: TextStyle(color: primaryColor),
-                              ),
+                              icon: Icon(Icons.arrow_back, color: primaryColor),
                             ),
+
                             Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: CustomTextButton(text: 'Confirm'),
-                                  ),
-                                ],
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'Vehicle Type',
+                                      style: TextStyle(
+                                        color: lightBlack,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: const [
+                                        CustomVehicleIcons(
+                                          icon: Icons.motorcycle,
+                                        ),
+                                        CustomVehicleIcons(
+                                          icon: Icons
+                                              .directions_bus_filled_rounded,
+                                        ),
+                                        CustomVehicleIcons(
+                                          icon: Icons.directions_car_filled,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 40),
+                                    CustomTextButton(
+                                      text: 'Confirm',
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DeliveryDetails(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -282,27 +334,6 @@ class _GoogleMapsState extends State<GoogleMaps> {
                             ),
 
                             const SizedBox(height: 14),
-                            const Text(
-                              'Vehicle Type',
-                              style: TextStyle(
-                                color: lightBlack,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                CustomVehicleIcons(icon: Icons.motorcycle),
-                                CustomVehicleIcons(
-                                  icon: Icons.directions_bus_filled_rounded,
-                                ),
-                                CustomVehicleIcons(
-                                  icon: Icons.directions_car_filled,
-                                ),
-                              ],
-                            ),
 
                             const SizedBox(height: 30),
                             CustomTextButton(
@@ -311,7 +342,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
                                 // Collapse the sheet
 
                                 _draggableScrollableController.animateTo(
-                                  0.25,
+                                  0.5,
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeInOut,
                                 );
@@ -346,14 +377,30 @@ class CustomVehicleIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {},
-      padding: EdgeInsets.all(20),
-      icon: Icon(icon, size: 50, color: primaryColor),
-      style: TextButton.styleFrom(
-        backgroundColor: background,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconButton(
+          onPressed: () {},
+          padding: EdgeInsets.all(20),
+          icon: Icon(icon, size: 40, color: primaryColor),
+          style: TextButton.styleFrom(
+            backgroundColor: background,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'Price:₵30.00',
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+        ),
+        Text(
+          '20 mins away',
+          style: TextStyle(fontSize: 10, color: primaryColor),
+        ),
+      ],
     );
   }
 }
