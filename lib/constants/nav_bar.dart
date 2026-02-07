@@ -1,4 +1,6 @@
 import 'package:delivery_app/constants/colors.dart';
+import 'package:delivery_app/home/home_screen.dart';
+import 'package:delivery_app/profile/history_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -18,7 +20,10 @@ class CustomBottomNavBar extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.home, color: lightBlack),
                 onPressed: () {
-                  // your action here
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
                 },
               ),
               Text('Home', style: TextStyle(color: lightBlack, fontSize: 12)),
@@ -31,7 +36,10 @@ class CustomBottomNavBar extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.calendar_month, color: lightBlack),
                 onPressed: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HistoryScreen()),
+                  );
                 },
               ),
               Text(
@@ -50,7 +58,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   // your action here
                 },
               ),
-              Text('profile', style: TextStyle(color: lightBlack, fontSize: 12)),
+              Text(
+                'profile',
+                style: TextStyle(color: lightBlack, fontSize: 12),
+              ),
             ],
           ),
         ],

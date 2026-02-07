@@ -43,8 +43,8 @@ class HomeScreen extends StatelessWidget {
 
                         Container(
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: primaryColorLight
+                              shape: BoxShape.circle,
+                              color: primaryColorLight
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -59,21 +59,22 @@ class HomeScreen extends StatelessWidget {
 
                 SizedBox(height: 30),
 
-                Text('What would you like to do?', style: TextStyle(fontSize: 11),),
+                Text('What would you like to do?',
+                  style: TextStyle(fontSize: 11),),
                 SizedBox(height: 10),
 
                 CustomCard(
                   icon: Icons.electric_bolt_outlined,
                   text: 'Instant Delivery',
                   subText:
-                      'Courier takes only your package and delivers instantly',
+                  'Courier takes only your package and delivers instantly',
                   color: primaryColorLight,
                 ),
                 CustomCard(
                   icon: Icons.timer_outlined,
                   text: 'Schedule Delivery',
                   subText:
-                      'Courier comes to pick up on your specified date and time',
+                  'Courier comes to pick up on your specified date and time',
                   color: background,
                 ),
 
@@ -97,99 +98,9 @@ class HomeScreen extends StatelessWidget {
 
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                        child: Column(
-                          children: [
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'ORD1234',
-                                          style: TextStyle(
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Receipient: Paul Pogba',
-                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w200),
-                                        ),
-                                      ],
-                                    ),
-
-                                    SizedBox(
-                                      height: 30,
-                                      child: TextButton(
-                                        onPressed: () {},
-                                        style: TextButton.styleFrom(
-                                          backgroundColor: greenColor,
-                                          foregroundColor: whiteColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Completed',
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    Icon(Icons.motorcycle, color: primaryColor),
-                                    SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_on_outlined,
-                                              size: 10,
-                                              color: primaryColor,
-                                            ),
-                                            Text(
-                                              'Drop Off',
-                                              style: TextStyle(fontSize: 11,fontWeight: FontWeight.w200),
-                                            ),
-                                          ],
-                                        ),
-
-                                        Text(
-                                          'Maryland bustop, Antony Ikeja',
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          '12 January 2026, 2:43pm',
-                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w200),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: 20),
-                            Divider(),
-                          ],
-                        ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 15),
+                          child: HistoryDetailsCard()
                       );
                     },
                   ),
@@ -202,6 +113,110 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+class HistoryDetailsCard extends StatelessWidget {
+  const HistoryDetailsCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ORD1234',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Receipient: Paul Pogba',
+                      style: TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w200),
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 30,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: greenColor,
+                      foregroundColor: whiteColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'Completed',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(Icons.motorcycle, color: primaryColor),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 10,
+                          color: primaryColor,
+                        ),
+                        Text(
+                          'Drop Off',
+                          style: TextStyle(
+                              fontSize: 11, fontWeight: FontWeight.w200),
+                        ),
+                      ],
+                    ),
+
+                    Text(
+                      'Maryland bustop, Antony Ikeja',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '12 January 2026, 2:43pm',
+                      style: TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w200),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(width: 20),
+        Divider(),
+      ],
+    );
+  }
+}
+
 
 class CustomCard extends StatelessWidget {
   final IconData icon;
@@ -220,8 +235,9 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMaps()));
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => GoogleMaps()));
       },
       child: Card(
         margin: EdgeInsets.only(bottom: 20),
@@ -249,7 +265,8 @@ class CustomCard extends StatelessWidget {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 5),
-                  Text(subText ?? '', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300)),
+                  Text(subText ?? '', style: TextStyle(
+                      fontSize: 11, fontWeight: FontWeight.w300)),
                 ],
               ),
             ),
