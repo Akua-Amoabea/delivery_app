@@ -1,6 +1,7 @@
 import 'package:delivery_app/constants/colors.dart';
 import 'package:delivery_app/home/home_screen.dart';
-import 'package:delivery_app/profile/history_screen.dart';
+import 'package:delivery_app/history/history_screen.dart';
+import 'package:delivery_app/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -55,7 +56,10 @@ class CustomBottomNavBar extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.person, color: lightBlack),
                 onPressed: () {
-                  // your action here
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
                 },
               ),
               Text(
