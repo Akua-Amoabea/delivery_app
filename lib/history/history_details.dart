@@ -66,25 +66,11 @@ class HistoryDetails extends StatelessWidget {
 
                   Row(
                     children: [
-                      SizedBox(
-                        height: 30,
-                        child: TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            backgroundColor: greenColor,
-                            foregroundColor: whiteColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          child: Text(
+                    Text(
                             'Completed',
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 14, color: primaryColor),
                           ),
-                        ),
-                      ),
+
                       SizedBox(width: 10),
                       Icon(Icons.motorcycle, color: primaryColor),
                     ],

@@ -3,7 +3,9 @@ import 'package:delivery_app/constants/nav_bar.dart';
 import 'package:delivery_app/history/history_details.dart';
 import 'package:delivery_app/history/history_screen.dart';
 import 'package:delivery_app/home/components/google_maps.dart';
+import 'package:delivery_app/provider/data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -72,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                   subText:
                       'Courier takes only your package and delivers instantly',
                   color: primaryColorLight,
+                  isScheduledDelivery: false,
                 ),
                 CustomCard(
                   icon: Icons.timer_outlined,
@@ -79,6 +82,7 @@ class HomeScreen extends StatelessWidget {
                   subText:
                       'Courier comes to pick up on your specified date and time',
                   color: background,
+                  isScheduledDelivery: true,
                 ),
 
                 Row(
@@ -162,7 +166,7 @@ class HistoryDetailsCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Receipient: Paul Pogba',
+                        'Recipient: Paul Pogba',
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w200,
@@ -174,7 +178,14 @@ class HistoryDetailsCard extends StatelessWidget {
                   SizedBox(
                     height: 30,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HistoryDetails(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         backgroundColor: greenColor,
                         foregroundColor: whiteColor,
@@ -246,6 +257,7 @@ class CustomCard extends StatelessWidget {
   final String? text;
   final String? subText;
   final Color? color;
+  final bool isScheduledDelivery;
 
   const CustomCard({
     super.key,
@@ -253,12 +265,14 @@ class CustomCard extends StatelessWidget {
     this.color,
     required this.icon,
     this.subText,
+    required this.isScheduledDelivery,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        context.read<DataProvider>().setIsScheduledDelivery(isScheduledDelivery);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => GoogleMaps()),

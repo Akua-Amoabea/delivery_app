@@ -7,23 +7,26 @@ class DataProvider extends ChangeNotifier {
   LatLng? _pickup;
   LatLng? _destination;
 
+  bool getIsScheduledDelivery = false;
 
- bool isOrdered = false;
+  void setIsScheduledDelivery(bool value) {
+    getIsScheduledDelivery = value;
+    notifyListeners();
+  }
 
+  bool isOrdered = false;
 
- void setIsOrdered(bool value){
-   isOrdered = value;
-   notifyListeners();
- }
-
+  void setIsOrdered(bool value) {
+    isOrdered = value;
+    notifyListeners();
+  }
 
   String selectedOption = "Me";
 
-void setOption(String value) {
-  selectedOption = value;
-  notifyListeners();
-}
-
+  void setOption(String value) {
+    selectedOption = value;
+    notifyListeners();
+  }
 
   final ControllerManager _controllerManager = ControllerManager();
 
